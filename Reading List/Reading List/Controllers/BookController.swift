@@ -16,12 +16,12 @@ class BookController {
     
     private(set) var books: [Book] = []
     
-    var readBooks: [Book]? {
+    var readBooks: [Book] {
         let readBooksArray = books.filter { $0.hasBeenRead == true }
         return readBooksArray
     }
     
-    var unreadBooks: [Book]? {
+    var unreadBooks: [Book] {
         let unreadBooksArray = books.filter { $0.hasBeenRead == false }
         return unreadBooksArray
     }
