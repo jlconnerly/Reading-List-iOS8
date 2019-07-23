@@ -2,7 +2,7 @@
 //  Book.swift
 //  Reading List
 //
-//  Created by Jake Connerly on 7/23/19.
+//  Created by Jake Connerly on 6/11/19.
 //  Copyright © 2019 Lambda School. All rights reserved.
 //
 
@@ -12,10 +12,4 @@ struct Book: Codable {
     var title: String
     var reasonToRead: String
     var hasBeenRead: Bool
-    
-    init(title: String, reasonToRead: String) {
-        self.title = title
-        self.reasonToRead = reasonToRead
-        hasBeenRead = false
-    }
 }
