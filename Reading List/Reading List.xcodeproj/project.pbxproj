@@ -49,9 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				466941682110E22A00E7FF73 /* AppDelegate.swift */,
-				4669416C2110E22B00E7FF73 /* Main.storyboard */,
 				4669416F2110E22B00E7FF73 /* Assets.xcassets */,
-				466941712110E22B00E7FF73 /* LaunchScreen.storyboard */,
 				466941742110E22B00E7FF73 /* Info.plist */,
 			);
 			path = Resources;
@@ -60,7 +58,9 @@
 		321ED9FD22B028BC0017F09D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4669416C2110E22B00E7FF73 /* Main.storyboard */,
 				322664FA22B050F5004CBFA2 /* ReadingListTableViewCell.swift */,
+				466941712110E22B00E7FF73 /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -76,8 +76,7 @@
 		322664F722B03B27004CBFA2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3226650122B07322004CBFA2 /* Model Controllers */,
-				3226650222B0732F004CBFA2 /* View Controllers */,
+				322664F522B03B23004CBFA2 /* BookController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -88,14 +87,6 @@
 				322664FE22B055C8004CBFA2 /* ReadingListTableViewCellDelegate.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		3226650122B07322004CBFA2 /* Model Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				322664F522B03B23004CBFA2 /* BookController.swift */,
-			);
-			path = "Model Controllers";
 			sourceTree = "<group>";
 		};
 		3226650222B0732F004CBFA2 /* View Controllers */ = {
@@ -128,6 +119,7 @@
 			children = (
 				322664F422B03B0C004CBFA2 /* Model */,
 				321ED9FD22B028BC0017F09D /* View */,
+				3226650222B0732F004CBFA2 /* View Controllers */,
 				322664F722B03B27004CBFA2 /* Controllers */,
 				3226650022B072CD004CBFA2 /* Protocols */,
 				321ED9FC22B028A30017F09D /* Resources */,

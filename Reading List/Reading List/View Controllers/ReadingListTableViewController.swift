@@ -69,35 +69,26 @@ class ReadingListTableViewController: UITableViewController {
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
     
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             bookController.deleteBook(bookToDelete: bookFor(indexPath: indexPath))
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
-    
+    //
     // MARK: - Navigation
+    //
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "DetailSegue" {
-            guard let selectedIndexPath = tableView.indexPathForSelectedRow else {return }
+            guard let bookDetailVC = segue.destination as? BookDetailViewController,
+                  let selectedIndexPath = tableView.indexPathForSelectedRow else {return }
             let selectedBook = bookFor(indexPath: selectedIndexPath)
-            print("this is the selected book: \(selectedBook)")
-            let bookDetailVC = segue.destination as! BookDetailViewController
             bookDetailVC.book = selectedBook
+            bookDetailVC.bookController = bookController
             
             //bookDetailVC.reasonToReadTextView!.text! = selectedBook.reasonToRead
         }else if segue.identifier == "AddSegue" {

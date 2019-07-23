@@ -22,6 +22,7 @@ class ReadingListTableViewCell: UITableViewCell {
             updateViews()
         }
     }
+    
     weak var delegate: ReadingListTableViewCellDelegate?
     
     //
@@ -37,13 +38,13 @@ class ReadingListTableViewCell: UITableViewCell {
     //
     
     func updateViews() {
-        
-        bookTitleLabel.text = book?.title
+        guard let book = book else { return }
+        bookTitleLabel.text = book.title
     
-        if book?.hasBeenRead == true {
-            readUnreadButton.imageView?.image = UIImage(named: "checked")
+        if book.hasBeenRead == true {
+            readUnreadButton.setImage(UIImage(named: "checked"), for: .normal)
         } else {
-            readUnreadButton.imageView?.image = UIImage(named: "unchecked")
+            readUnreadButton.setImage(UIImage(named: "unchecked"), for: .normal)
         }
     }
 
