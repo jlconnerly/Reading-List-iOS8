@@ -76,7 +76,7 @@
                     <navigationItem key="navigationItem" title="Reading List" id="3TZ-Ep-KcO">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="YnQ-QR-WNI">
                             <connections>
-                                <segue destination="Yzu-J3-CCq" kind="show" identifier="AddBookSegue" id="wvv-6n-nN6"/>
+                                <segue destination="w3u-8e-udI" kind="show" id="UKZ-e5-v50"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -114,16 +114,11 @@
             </objects>
             <point key="canvasLocation" x="1745" y="156"/>
         </scene>
-        <!--AddBook-->
-        <scene sceneID="LRK-Qn-ksn">
-            <objects>
-                <viewControllerPlaceholder storyboardName="AddBook" id="Yzu-J3-CCq" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6OS-1P-r9P" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1759" y="122"/>
-        </scene>
     </scenes>
     <resources>
         <image name="unchecked" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="UKZ-e5-v50"/>
+    </inferredMetricsTieBreakers>
 </document>

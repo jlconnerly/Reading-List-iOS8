@@ -17,23 +17,49 @@ class ReadingListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableView.delegate   = self
+        tableView.dataSource = self
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
-    */
+
+    //
+    // MARK: - Navigation
+    //
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetailSegue" {
+            guard let bookDetailVC      = segue.destination as? DetailViewController,
+                  let selectedIndexPath = tableView.indexPathForSelectedRow else { return }
+            bookDetailVC.bookController = bookController
+            let selectedBook = bookFor(indexPath: selectedIndexPath)
+            bookDetailVC.book = selectedBook
+        } else if segue.identifier == "AddBookSegue" {
+            guard let addBookVC = segue.destination as? DetailViewController else { return }
+            addBookVC.bookController = bookController
+        }
+    }
+ 
 
 }
 
+//
+// MARK: - Extension TableView Data Source
+//
+
 extension ReadingListViewController: UITableViewDataSource {
+    
+    private func bookFor(indexPath: IndexPath) -> Book {
+        if indexPath.section == 0 {
+            return bookController.readBooks[indexPath.row]
+        } else {
+            return bookController.unreadBooks[indexPath.row]
+        }
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -62,8 +88,33 @@ extension ReadingListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BookCell", for: indexPath) as? ReadingListTableViewCell else { return UITableViewCell() }
+        let book = bookFor(indexPath: indexPath)
+        cell.book = book
+        cell.delegate = self
+        return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            bookController.deleteBook(bookToDelete: bookFor(indexPath: indexPath))
+        }
+        tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+}
+
+extension ReadingListViewController: UITableViewDelegate {
+}
+
+//
+// MARK: - Etension ReadingListTableViewCellDelegate
+//
+
+extension ReadingListViewController: ReadingListTableViewCellDelegate {
+    func toggleHasBeenRead(for cell: ReadingListTableViewCell) {
+        guard let book = cell.book else { return }
+        bookController.updateHasBeenRead(for: book)
+        tableView.reloadData()
+        cell.updateViews()
+    }
 }

@@ -10,21 +10,33 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+  
+    @IBOutlet weak var bookTitleTextField: UITextField!
+    @IBOutlet weak var reasonTextView: UITextView!
+    
+    var bookController: BookController?
+    
+    var book: Book? {
+        didSet {
+            updateViews()
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func updateViews() {
+        guard let book = book else { return }
+        
+        bookTitleTextField.text = book.title
+        reasonTextView.text = book.reasonToRead
+        self.title = book.title
     }
-    */
+    
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        guard let bookTitle = bookTitleTextField.text,
+            !bookTitle.isEmpty,
+            let reason = reasonTextView.text,
+            !reason.isEmpty else { return }
+        bookController?.createBook(withName: bookTitle, reasonToRead: reason)
+        self.dismiss(animated: true, completion: nil)
+    }
 
 }
