@@ -10,20 +10,24 @@ import UIKit
 
 class ReadingListTableViewController: UITableViewController {
     
+    //
+    // MARK: - Properties
+    //
+    
     let bookController = BookController()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    //
+    // MARK: - View LifeCycle
+    //
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-        
     }
 
+    //
     // MARK: - Table view data source
-
+    //
     
     private func bookFor(indexPath: IndexPath) -> Book {
         if indexPath.section == 0 {
@@ -65,7 +69,6 @@ class ReadingListTableViewController: UITableViewController {
         cell.book = book
         cell.delegate = self
         
-        
         return cell
     }
     
@@ -76,6 +79,7 @@ class ReadingListTableViewController: UITableViewController {
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
+    
     //
     // MARK: - Navigation
     //
@@ -90,18 +94,19 @@ class ReadingListTableViewController: UITableViewController {
             bookDetailVC.book = selectedBook
             bookDetailVC.bookController = bookController
             
-            //bookDetailVC.reasonToReadTextView!.text! = selectedBook.reasonToRead
         }else if segue.identifier == "AddSegue" {
-            let addBookVC = segue.destination as! BookDetailViewController
+            guard let addBookVC = segue.destination as? BookDetailViewController else { return }
             addBookVC.bookController = bookController
+            addBookVC.title = "Add a Book"
         }
     }
     
 
 } // end of class
 
-
-
+//
+// MARK: - Extensions
+//
 
 extension ReadingListTableViewController: ReadingListTableViewCellDelegate {
     func toggleHasBeenRead(for cell: ReadingListTableViewCell) {

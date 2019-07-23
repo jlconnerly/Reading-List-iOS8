@@ -9,6 +9,11 @@
 import UIKit
 
 class BookDetailViewController: UIViewController {
+    
+    //
+    //MARK: - IBOutlets and Properties
+    //
+    
     @IBOutlet weak var bookTitleTextField: UITextField!
     @IBOutlet weak var reasonToReadTextView: UITextView!
     
@@ -16,15 +21,18 @@ class BookDetailViewController: UIViewController {
     
     var book: Book? {
         didSet {
-            updateViews()
+            if let _ = view {
+                updateViews()
+            }
+
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    //
+    //MARK: - IBActions & Methods
+    //
+    
 
-        // Do any additional setup after loading the view.
-    }
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let bookTitle      = bookTitleTextField.text,
               let reason         = reasonToReadTextView.text,
@@ -34,9 +42,9 @@ class BookDetailViewController: UIViewController {
     }
     
     func updateViews() {
+        
         guard let book = book else { return }
    
-        
         bookTitleTextField.text = book.title
         reasonToReadTextView.text = book.reasonToRead
         self.title = title
